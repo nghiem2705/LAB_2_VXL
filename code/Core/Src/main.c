@@ -18,11 +18,10 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "exercise1.h"
-#include "software_timer.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "exercise1.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -69,8 +68,6 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-	set_timer(0, 100);
-	set_timer(1, 100);
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -103,15 +100,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	if (reg_flag[0] >= 1) {
-		HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
-		set_timer(0, 100);
-	}
 
-	if (reg_flag[1] >= 1) {
-		switchLed();
-		set_timer(1, 100);
-	}
   }
   /* USER CODE END 3 */
 }
@@ -263,8 +252,8 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, LED_RED_Pin|EN0_Pin|EN1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, SEG1_Pin|SEG2_Pin|SEG7_Pin|SEG3_Pin
-                          |SEG4_Pin|SEG5_Pin|SEG6_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, SEG1_Pin|SEG2_Pin|SEG3_Pin|SEG4_Pin
+                          |SEG5_Pin|SEG6_Pin|SEG7_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : LED_RED_Pin EN0_Pin EN1_Pin */
   GPIO_InitStruct.Pin = LED_RED_Pin|EN0_Pin|EN1_Pin;
@@ -273,10 +262,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : SEG1_Pin SEG2_Pin SEG7_Pin SEG3_Pin
-                           SEG4_Pin SEG5_Pin SEG6_Pin */
-  GPIO_InitStruct.Pin = SEG1_Pin|SEG2_Pin|SEG7_Pin|SEG3_Pin
-                          |SEG4_Pin|SEG5_Pin|SEG6_Pin;
+  /*Configure GPIO pins : SEG1_Pin SEG2_Pin SEG3_Pin SEG4_Pin
+                           SEG5_Pin SEG6_Pin SEG7_Pin */
+  GPIO_InitStruct.Pin = SEG1_Pin|SEG2_Pin|SEG3_Pin|SEG4_Pin
+                          |SEG5_Pin|SEG6_Pin|SEG7_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -291,7 +280,22 @@ static void MX_GPIO_Init(void)
 int counter = 100;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	  if (htim->Instance == htim2.Instance) {
-		  run_timer();
+		 if (counter <= 0){
+			 HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+			 counter = 100;
+		 }
+
+		 else if (counter <= 50) {
+			 RESET_EN1();
+			 display7SEG(2);
+		 }
+
+		 else if (counter <= 100) {
+			 RESET_EN0();
+			 display7SEG(1);
+		 }
+
+		 counter--;
 	  }
 }
 /* USER CODE END 4 */

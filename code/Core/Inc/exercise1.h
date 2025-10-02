@@ -11,6 +11,6 @@
 #include "main.h"
 //exercise1
 void display7SEG(int num);
-void switchLed();
-
+void RESET_EN1();
+void RESET_EN0();
 #endif /* INC_EXERCISE1_H_ */

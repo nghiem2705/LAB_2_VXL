@@ -103,20 +103,13 @@ void display7SEG(int num){
 	 }
  }
 
-int state7SEG = 0;
+void RESET_EN1() {
+	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
+	HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, RESET);
+}
 
-void switchLed(){
-	switch(state7SEG) {
-	case 0 :
-		HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
-		HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, RESET);
-		state7SEG = 1;
-		break;
-	case 1 :
-		HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, RESET);
-		HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
-		state7SEG = 0;
-		break;
-	}
+void RESET_EN0() {
+	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, RESET);
+	HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
 }
 
