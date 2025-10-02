@@ -1,3 +1,5 @@
 ../Core/Src/exercise1.c:10:6:display7SEG	16	static
 ../Core/Src/exercise1.c:106:6:RESET_EN1	8	static
-../Core/Src/exercise1.c:111:6:RESET_EN0	8	static
+../Core/Src/exercise1.c:113:6:RESET_EN0	8	static
+../Core/Src/exercise1.c:121:6:RESET_EN2	8	static
+../Core/Src/exercise1.c:128:6:RESET_EN3	8	static
