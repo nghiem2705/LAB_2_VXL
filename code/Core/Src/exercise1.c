@@ -7,8 +7,9 @@
 
 #include "exercise1.h"
 
+//exercise1
 void display7SEG(int num){
-	 //1
+
 	 switch(num){
 	 case 0:
 		 HAL_GPIO_WritePin(SEG1_GPIO_Port, SEG1_Pin, GPIO_PIN_RESET);
@@ -103,13 +104,33 @@ void display7SEG(int num){
 	 }
  }
 
+
 void RESET_EN1() {
-	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
+	HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
+	HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
 	HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, RESET);
+	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
 }
 
 void RESET_EN0() {
-	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, RESET);
+	HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
+	HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin,  SET);
 	HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
+	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, RESET);
 }
 
+
+//exercise 2
+void RESET_EN2() {
+	HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
+	HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, RESET);
+	HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
+	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
+}
+
+void RESET_EN3() {
+	HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, RESET);
+	HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
+	HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
+	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
+}
