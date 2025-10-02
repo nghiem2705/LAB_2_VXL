@@ -15,6 +15,8 @@ void RESET_EN1();
 void RESET_EN0();
 
 //exercise2
+extern state;
 void RESET_EN2();
 void RESET_EN3();
+void machine_state();
 #endif /* INC_EXERCISE1_H_ */

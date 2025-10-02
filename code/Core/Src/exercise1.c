@@ -132,3 +132,46 @@ void RESET_EN3() {
 	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
 }
 
+void SET_ALL() {
+	HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
+	HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
+	HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
+	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
+}
+
+int state = 0;
+
+void machine_state() {
+	switch(state) {
+	case 0 :
+		HAL_GPIO_WritePin(DOT_GPIO_Port, DOT_Pin, SET);
+		RESET_EN0();
+		display7SEG(1);
+		state = 1;
+		break;
+	case 1 :
+		HAL_GPIO_WritePin(DOT_GPIO_Port, DOT_Pin, SET);
+		RESET_EN1();
+		display7SEG(2);
+		state = 2;
+		break;
+	case 2:
+		SET_ALL();
+		HAL_GPIO_WritePin(DOT_GPIO_Port, DOT_Pin, RESET);
+		state = 3;
+		break;
+	case 3 :
+		HAL_GPIO_WritePin(DOT_GPIO_Port, DOT_Pin, SET);
+		RESET_EN2();
+		display7SEG(3);
+		state = 4;
+		break;
+	case 4 :
+		HAL_GPIO_WritePin(DOT_GPIO_Port, DOT_Pin, SET);
+		RESET_EN3();
+		display7SEG(0);
+		state = 0;
+		break;
+	}
+
+}
