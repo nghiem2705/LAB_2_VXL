@@ -13,7 +13,4 @@
 void display7SEG(int num);
 void RESET_EN1();
 void RESET_EN0();
-//exercise2
-void RESET_EN2();
-void RESET_EN3();
 #endif /* INC_EXERCISE1_H_ */
