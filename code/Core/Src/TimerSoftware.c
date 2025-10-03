@@ -6,8 +6,8 @@
  */
 #include "TimerSoftware.h"
 
-int count_timer[2] = {0};
-int reg_flag[2] = {0};
+int count_timer[MAX_SIZE] = {0};
+int reg_flag[MAX_SIZE] = {0};
 
 void set_timer(int index, int time_value) {
 	count_timer[index] = time_value;
@@ -15,7 +15,7 @@ void set_timer(int index, int time_value) {
 }
 
 void run_timer() {
-	for(int i = 0; i < 2; i++) {
+	for(int i = 0; i < MAX_SIZE; i++) {
 		count_timer[i]--;
 		if(count_timer[i] <= 0) {
 			reg_flag[i] = 1;

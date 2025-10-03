@@ -27,21 +27,21 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  0000400c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00007dcc  00000000  00000000  00004035  2**0
+ 12 .debug_info   00007dc4  00000000  00000000  00004035  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 000017d0  00000000  00000000  0000be01  2**0
+ 13 .debug_abbrev 000017c1  00000000  00000000  0000bdf9  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 000009b0  00000000  00000000  0000d5d8  2**3
+ 14 .debug_aranges 000009b0  00000000  00000000  0000d5c0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 0000076f  00000000  00000000  0000df88  2**0
+ 15 .debug_rnglists 0000076f  00000000  00000000  0000df70  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  000164cb  00000000  00000000  0000e6f7  2**0
+ 16 .debug_macro  000164d9  00000000  00000000  0000e6df  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000a198  00000000  00000000  00024bc2  2**0
+ 17 .debug_line   0000a198  00000000  00000000  00024bb8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0008213c  00000000  00000000  0002ed5a  2**0
+ 18 .debug_str    00082147  00000000  00000000  0002ed50  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000b0e96  2**0
+ 19 .comment      00000043  00000000  00000000  000b0e97  2**0
                   CONTENTS, READONLY
  20 .debug_frame  00002728  00000000  00000000  000b0edc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -81,8 +81,8 @@ Disassembly of section .text:
 0800014c <set_timer>:
 #include "TimerSoftware.h"
 
-int count_timer[2] = {0};
-int reg_flag[2] = {0};
+int count_timer[MAX_SIZE] = {0};
+int reg_flag[MAX_SIZE] = {0};
 
 void set_timer(int index, int time_value) {
  800014c:	b480      	push	{r7}
@@ -115,7 +115,7 @@ void run_timer() {
  800017c:	b480      	push	{r7}
  800017e:	b083      	sub	sp, #12
  8000180:	af00      	add	r7, sp, #0
-	for(int i = 0; i < 2; i++) {
+	for(int i = 0; i < MAX_SIZE; i++) {
  8000182:	2300      	movs	r3, #0
  8000184:	607b      	str	r3, [r7, #4]
  8000186:	e016      	b.n	80001b6 <run_timer+0x3a>
@@ -138,7 +138,7 @@ void run_timer() {
  80001a8:	687b      	ldr	r3, [r7, #4]
  80001aa:	2101      	movs	r1, #1
  80001ac:	f842 1023 	str.w	r1, [r2, r3, lsl #2]
-	for(int i = 0; i < 2; i++) {
+	for(int i = 0; i < MAX_SIZE; i++) {
  80001b0:	687b      	ldr	r3, [r7, #4]
  80001b2:	3301      	adds	r3, #1
  80001b4:	607b      	str	r3, [r7, #4]

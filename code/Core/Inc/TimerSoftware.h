@@ -7,9 +7,9 @@
 
 #ifndef INC_TIMERSOFTWARE_H_
 #define INC_TIMERSOFTWARE_H_
-
-extern int count_timer[2];
-extern int reg_flag[2];
+#define MAX_SIZE 2
+extern int count_timer[MAX_SIZE];
+extern int reg_flag[MAX_SIZE];
 
 void set_timer(int index, int time_value) ;
 
