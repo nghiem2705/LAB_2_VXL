@@ -19,4 +19,7 @@ void RESET_EN2();
 void RESET_EN3();
 void machine_state();
 
+//exercise3
+void update7SEG(int index);
+
 #endif /* INC_EXERCISE1_H_ */

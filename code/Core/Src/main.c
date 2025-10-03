@@ -94,6 +94,7 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim2);
   set_timer(0, 100);
   set_timer(1, 50);
+  int index = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -105,11 +106,12 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	if (reg_flag[0] == 1) {
 		HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+		HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
 		set_timer(0, 100);
 	}
 
 	else if (reg_flag[1] == 1){
-		machine_state();
+		update7SEG((index++) % 4);
 		set_timer(1, 50);
 	}
 

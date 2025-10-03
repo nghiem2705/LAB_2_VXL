@@ -5,3 +5,4 @@
 ../Core/Src/exercise1.c:128:6:RESET_EN3	1
 ../Core/Src/exercise1.c:135:6:SET_ALL	1
 ../Core/Src/exercise1.c:144:6:machine_state	6
+../Core/Src/exercise1.c:184:6:update7SEG	5
