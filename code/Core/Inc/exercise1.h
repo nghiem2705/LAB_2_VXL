@@ -26,5 +26,6 @@ void update7SEG(int index);
 extern int hour;
 extern int minute;
 extern int second;
+extern int led_index;
 void updateClockBuffer();
 #endif /* INC_EXERCISE1_H_ */

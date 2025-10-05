@@ -93,8 +93,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
   set_timer(0, 100);
-  set_timer(1, 25);
-  int index = 0;
+//  set_timer(1, 25);
 //  set_timer(2, time_value)
   /* USER CODE END 2 */
 
@@ -125,12 +124,6 @@ int main(void)
 
 		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
 		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
-	  }
-
-	  if (reg_flag[1] >= 1) {
-		  updateClockBuffer();
-		  update7SEG((index++) % 4);
-		  set_timer(1, 25);
 	  }
 
   }
@@ -312,9 +305,15 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+int counter = 25;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	  if (htim->Instance == htim2.Instance) {
-		  run_timer();
+		  counter--;
+		  if (counter <= 0) {
+			  counter = 25 ;
+			  updateClockBuffer();
+			  update7SEG((led_index++) % 4);
+		  }
 	  }
 
 }
