@@ -22,4 +22,9 @@ void machine_state();
 //exercise3
 void update7SEG(int index);
 
+//exercise5
+extern int hour;
+extern int minute;
+extern int second;
+void updateClockBuffer();
 #endif /* INC_EXERCISE1_H_ */

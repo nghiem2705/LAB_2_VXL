@@ -6,3 +6,4 @@
 ../Core/Src/exercise1.c:135:6:SET_ALL	8	static
 ../Core/Src/exercise1.c:144:6:machine_state	8	static
 ../Core/Src/exercise1.c:184:6:update7SEG	16	static
+../Core/Src/exercise1.c:211:6:updateClockBuffer	4	static
