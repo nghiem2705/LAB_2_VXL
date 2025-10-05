@@ -179,7 +179,6 @@ void machine_state() {
 
 //exercise3
 const int MAX_LED = 4;
-int index_led = 0;
 int led_buffer[4] = {1,2,3,4};
 void update7SEG(int index) {
 	switch(index) {
@@ -203,6 +202,7 @@ void update7SEG(int index) {
 		break ;
 	}
 }
+
 
 //exercise5
 int hour = 15;
