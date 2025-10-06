@@ -27,4 +27,11 @@ extern int hour;
 extern int minute;
 extern int second;
 void updateClockBuffer();
+
+//exercise9
+extern int index_led_matrix;
+const int MAX_LED_MATRIX = 8;
+
+uint8_t matrix_buffer [8] ;
+
 #endif /* INC_EXERCISE1_H_ */
