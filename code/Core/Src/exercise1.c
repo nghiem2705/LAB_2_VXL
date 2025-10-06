@@ -216,6 +216,43 @@ void updateClockBuffer() {
 }
 
 
+//exercise9
+const int MAX_LED_MATRIX = 8 ;
+int index_led_matrix = 0;
+uint8_t matrix_buffer[8] = {0x00, 0x00, 0x3E, 0x48, 0x48, 0x3E, 0x00, 0x00};
+void updateLEDMatrix(int index) {
+    // 1. Disable toàn bộ hàng (ENMx) trước
+    HAL_GPIO_WritePin(GPIOA, EMN0_Pin|EMN1_Pin|EMN2_Pin|EMN3_Pin|EMN4_Pin|EMN5_Pin|EMN6_Pin|EMN7_Pin, GPIO_PIN_SET);
+
+    // 2. Lấy giá trị cột từ buffer
+    uint8_t col_data = matrix_buffer[index];
+
+    // 3. Xuất từng bit ra COL0 -> COL7
+    // Bit 0 ứng với COL0, Bit 1 ứng với COL1, ...
+    HAL_GPIO_WritePin(COL0_GPIO_Port, COL0_Pin, (col_data & 0x01) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(COL1_GPIO_Port, COL1_Pin, (col_data & 0x02) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(COL2_GPIO_Port, COL2_Pin, (col_data & 0x04) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(COL3_GPIO_Port, COL3_Pin, (col_data & 0x08) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(COL4_GPIO_Port, COL4_Pin, (col_data & 0x10) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(COL5_GPIO_Port, COL5_Pin, (col_data & 0x20) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(COL6_GPIO_Port, COL6_Pin, (col_data & 0x40) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(COL7_GPIO_Port, COL7_Pin, (col_data & 0x80) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+
+    // 4. Kích hoạt hàng tương ứng (chỉ bật một ENM tại 1 thời điểm nếu quét từng dòng)
+    switch(index) {
+        case 0: HAL_GPIO_WritePin(GPIOA, EMN0_Pin, GPIO_PIN_RESET); break;
+        case 1: HAL_GPIO_WritePin(GPIOA, EMN1_Pin, GPIO_PIN_RESET); break;
+        case 2: HAL_GPIO_WritePin(GPIOA, EMN2_Pin, GPIO_PIN_RESET); break;
+        case 3: HAL_GPIO_WritePin(GPIOA, EMN3_Pin, GPIO_PIN_RESET); break;
+        case 4: HAL_GPIO_WritePin(GPIOA, EMN4_Pin, GPIO_PIN_RESET); break;
+        case 5: HAL_GPIO_WritePin(GPIOA, EMN5_Pin, GPIO_PIN_RESET); break;
+        case 6: HAL_GPIO_WritePin(GPIOA, EMN6_Pin, GPIO_PIN_RESET); break;
+        case 7: HAL_GPIO_WritePin(GPIOA, EMN7_Pin, GPIO_PIN_RESET); break;
+    }
+}
+
+
+
 
 
 

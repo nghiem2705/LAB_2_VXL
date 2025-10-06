@@ -7,3 +7,4 @@
 ../Core/Src/exercise1.c:144:6:machine_state	6
 ../Core/Src/exercise1.c:183:6:update7SEG	5
 ../Core/Src/exercise1.c:211:6:updateClockBuffer	1
+../Core/Src/exercise1.c:223:6:updateLEDMatrix	9
