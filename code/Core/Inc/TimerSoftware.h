@@ -7,7 +7,7 @@
 
 #ifndef INC_TIMERSOFTWARE_H_
 #define INC_TIMERSOFTWARE_H_
-#define MAX_SIZE 2
+#define MAX_SIZE 10
 extern int count_timer[MAX_SIZE];
 extern int reg_flag[MAX_SIZE];
 
