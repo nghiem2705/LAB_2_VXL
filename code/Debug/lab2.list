@@ -846,7 +846,7 @@ void updateClockBuffer() {
 //exercise9
 const int MAX_LED_MATRIX = 8 ;
 int index_led_matrix = 0;
-uint8_t matrix_buffer[8] = {0x00, 0x00, 0x3E, 0x48, 0x48, 0x3E, 0x00, 0x00};
+uint8_t matrix_buffer[8] = {0x3E, 0x48, 0x48, 0x3E, 0x3E, 0x48, 0x48, 0x3E};
 void updateLEDMatrix(int index) {
  80006d0:	b580      	push	{r7, lr}
  80006d2:	b082      	sub	sp, #8
@@ -1276,8 +1276,8 @@ int main(void)
  80009fc:	4253      	negpl	r3, r2
  80009fe:	4618      	mov	r0, r3
  8000a00:	f7ff fe66 	bl	80006d0 <updateLEDMatrix>
-		  set_timer(2, 10);
- 8000a04:	210a      	movs	r1, #10
+		  set_timer(2, 1);
+ 8000a04:	2101      	movs	r1, #1
  8000a06:	2002      	movs	r0, #2
  8000a08:	f7ff fba0 	bl	800014c <set_timer>
 	  if (reg_flag[0] >= 1) {

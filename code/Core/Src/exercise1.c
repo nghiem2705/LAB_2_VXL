@@ -219,7 +219,7 @@ void updateClockBuffer() {
 //exercise9
 const int MAX_LED_MATRIX = 8 ;
 int index_led_matrix = 0;
-uint8_t matrix_buffer[8] = {0x00, 0x00, 0x3E, 0x48, 0x48, 0x3E, 0x00, 0x00};
+uint8_t matrix_buffer[8] = {0x3E, 0x48, 0x48, 0x3E, 0x3E, 0x48, 0x48, 0x3E};
 void updateLEDMatrix(int index) {
     // Tắt hết các cột
     HAL_GPIO_WritePin(EMN0_GPIO_Port, EMN0_Pin, SET);

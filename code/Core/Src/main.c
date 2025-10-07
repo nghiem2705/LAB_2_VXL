@@ -136,7 +136,7 @@ int main(void)
 
 	  if (reg_flag[2] >= 1) {
 		  updateLEDMatrix((index_led_matrix++) % 8);
-		  set_timer(2, 10);
+		  set_timer(2, 1);
 	  }
 
 
