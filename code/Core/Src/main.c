@@ -94,9 +94,9 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim2);
   set_timer(0, 100);
   set_timer(1, 25);
+  set_timer(2, 10);
 
-//  int index = 0;
-//  set_timer(2, time_value)
+  int index = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -107,37 +107,38 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	  if (reg_flag[0] >= 1) {
-//		  if (second >= 60) {
-//			  second = 0;
-//			  minute++;
-//		  }
-//
-//		  if (minute >= 60) {
-//			  minute = 0;
-//			  hour++;
-//		  }
-//
-//		  if (hour >= 24) {
-//			  hour = 0;
-//		  }
-//
-//		  second++;
-//		  set_timer(0, 100);
-//
-//		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
-//		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
+		  if (second >= 60) {
+			  second = 0;
+			  minute++;
+		  }
+
+		  if (minute >= 60) {
+			  minute = 0;
+			  hour++;
+		  }
+
+		  if (hour >= 24) {
+			  hour = 0;
+		  }
+
+		  second++;
+		  set_timer(0, 100);
+
+		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
 	  }
 
 	  if (reg_flag[1] >= 1) {
-//		  updateClockBuffer();
-//		  update7SEG((index++) % 4);
-
-		  updateLEDMatrix((index_led_matrix++) % 8);
+		  updateClockBuffer();
+		  update7SEG((index++) % 4);
 		  set_timer(1, 25);
 	  }
 
-	  updateLEDMatrix((index_led_matrix++) % 8);
-	  HAL_Delay(1000);
+	  if (reg_flag[2] >= 1) {
+		  updateLEDMatrix((index_led_matrix++) % 8);
+		  set_timer(2, 10);
+	  }
+
 
   }
   /* USER CODE END 3 */
@@ -332,7 +333,7 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	  if (htim->Instance == htim2.Instance) {
-//		  run_timer();
+		  run_timer();
 	  }
 
 }

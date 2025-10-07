@@ -221,36 +221,39 @@ const int MAX_LED_MATRIX = 8 ;
 int index_led_matrix = 0;
 uint8_t matrix_buffer[8] = {0x00, 0x00, 0x3E, 0x48, 0x48, 0x3E, 0x00, 0x00};
 void updateLEDMatrix(int index) {
-    // 1. Disable toàn bộ hàng (ENMx) trước
-    HAL_GPIO_WritePin(EMN0_GPIO_Port, EMN0_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(ROW0_GPIO_Port, ROW0_Pin, GPIO_PIN_SET);
+    // Tắt hết các cột
+    HAL_GPIO_WritePin(EMN0_GPIO_Port, EMN0_Pin, SET);
+    HAL_GPIO_WritePin(EMN1_GPIO_Port, EMN1_Pin, SET);
+    HAL_GPIO_WritePin(EMN2_GPIO_Port, EMN2_Pin, SET);
+    HAL_GPIO_WritePin(EMN3_GPIO_Port, EMN3_Pin, SET);
+    HAL_GPIO_WritePin(EMN4_GPIO_Port, EMN4_Pin, SET);
+    HAL_GPIO_WritePin(EMN5_GPIO_Port, EMN5_Pin, SET);
+    HAL_GPIO_WritePin(EMN6_GPIO_Port, EMN6_Pin, SET);
+    HAL_GPIO_WritePin(EMN7_GPIO_Port, EMN7_Pin, SET);
 
-//    // 2. Lấy giá trị cột từ buffer
-//    uint8_t col_data = matrix_buffer[index];
-//
-//    // 3. Xuất từng bit ra COL0 -> COL7
-//    // Bit 0 ứng với COL0, Bit 1 ứng với COL1, ...
-//    HAL_GPIO_WritePin(COL0_GPIO_Port, COL0_Pin, (col_data & 0x01) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-//    HAL_GPIO_WritePin(COL1_GPIO_Port, COL1_Pin, (col_data & 0x02) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-//    HAL_GPIO_WritePin(COL2_GPIO_Port, COL2_Pin, (col_data & 0x04) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-//    HAL_GPIO_WritePin(COL3_GPIO_Port, COL3_Pin, (col_data & 0x08) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-//    HAL_GPIO_WritePin(COL4_GPIO_Port, COL4_Pin, (col_data & 0x10) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-//    HAL_GPIO_WritePin(COL5_GPIO_Port, COL5_Pin, (col_data & 0x20) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-//    HAL_GPIO_WritePin(COL6_GPIO_Port, COL6_Pin, (col_data & 0x40) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-//    HAL_GPIO_WritePin(COL7_GPIO_Port, COL7_Pin, (col_data & 0x80) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-//
-//    // 4. Kích hoạt hàng tương ứng (chỉ bật một ENM tại 1 thời điểm nếu quét từng dòng)
-//    switch(index) {
-//        case 0: HAL_GPIO_WritePin(GPIOA, EMN0_Pin, GPIO_PIN_RESET); break;
-//        case 1: HAL_GPIO_WritePin(GPIOA, EMN1_Pin, GPIO_PIN_RESET); break;
-//        case 2: HAL_GPIO_WritePin(GPIOA, EMN2_Pin, GPIO_PIN_RESET); break;
-//        case 3: HAL_GPIO_WritePin(GPIOA, EMN3_Pin, GPIO_PIN_RESET); break;
-//        case 4: HAL_GPIO_WritePin(GPIOA, EMN4_Pin, GPIO_PIN_RESET); break;
-//        case 5: HAL_GPIO_WritePin(GPIOA, EMN5_Pin, GPIO_PIN_RESET); break;
-//        case 6: HAL_GPIO_WritePin(GPIOA, EMN6_Pin, GPIO_PIN_RESET); break;
-//        case 7: HAL_GPIO_WritePin(GPIOA, EMN7_Pin, GPIO_PIN_RESET); break;
-//    }
+    // Bật cột đang quét
+    switch(index) {
+        case 0: HAL_GPIO_WritePin(EMN0_GPIO_Port, EMN0_Pin, RESET); break;
+        case 1: HAL_GPIO_WritePin(EMN1_GPIO_Port, EMN1_Pin, RESET); break;
+        case 2: HAL_GPIO_WritePin(EMN2_GPIO_Port, EMN2_Pin, RESET); break;
+        case 3: HAL_GPIO_WritePin(EMN3_GPIO_Port, EMN3_Pin, RESET); break;
+        case 4: HAL_GPIO_WritePin(EMN4_GPIO_Port, EMN4_Pin, RESET); break;
+        case 5: HAL_GPIO_WritePin(EMN5_GPIO_Port, EMN5_Pin, RESET); break;
+        case 6: HAL_GPIO_WritePin(EMN6_GPIO_Port, EMN6_Pin, RESET); break;
+        case 7: HAL_GPIO_WritePin(EMN7_GPIO_Port, EMN7_Pin, RESET); break;
+    }
+
+    // Gán dữ liệu hàng
+    HAL_GPIO_WritePin(ROW0_GPIO_Port, ROW0_Pin, ((matrix_buffer[index] >> 7) & 0x01) ? GPIO_PIN_RESET : GPIO_PIN_SET);
+    HAL_GPIO_WritePin(ROW1_GPIO_Port, ROW1_Pin, ((matrix_buffer[index] >> 6) & 0x01) ? GPIO_PIN_RESET : GPIO_PIN_SET);
+    HAL_GPIO_WritePin(ROW2_GPIO_Port, ROW2_Pin, ((matrix_buffer[index] >> 5) & 0x01) ? GPIO_PIN_RESET : GPIO_PIN_SET);
+    HAL_GPIO_WritePin(ROW3_GPIO_Port, ROW3_Pin, ((matrix_buffer[index] >> 4) & 0x01) ? GPIO_PIN_RESET : GPIO_PIN_SET);
+    HAL_GPIO_WritePin(ROW4_GPIO_Port, ROW4_Pin, ((matrix_buffer[index] >> 3) & 0x01) ? GPIO_PIN_RESET : GPIO_PIN_SET);
+    HAL_GPIO_WritePin(ROW5_GPIO_Port, ROW5_Pin, ((matrix_buffer[index] >> 2) & 0x01) ? GPIO_PIN_RESET : GPIO_PIN_SET);
+    HAL_GPIO_WritePin(ROW6_GPIO_Port, ROW6_Pin, ((matrix_buffer[index] >> 1) & 0x01) ? GPIO_PIN_RESET : GPIO_PIN_SET);
+    HAL_GPIO_WritePin(ROW7_GPIO_Port, ROW7_Pin, ((matrix_buffer[index] >> 0) & 0x01) ? GPIO_PIN_RESET : GPIO_PIN_SET);
 }
+
 
 
 
