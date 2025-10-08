@@ -93,7 +93,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
   set_timer(0, 100);
-  set_timer(1, 100);
+  set_timer(1, 25);
   int index = 0;
   /* USER CODE END 2 */
 
@@ -112,7 +112,7 @@ int main(void)
 
 	else if (reg_flag[1] == 1){
 		update7SEG((index++) % 4);
-		set_timer(1, 100);
+		set_timer(1, 25);
 	}
 
   }
